@@ -1,0 +1,11 @@
+* {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    font-family: 'Poppins';
+}
+
+/* NavBar */
+.navbar-brand {
+    font-family: 'Orbitron';
+}

@@ -82,13 +82,77 @@ def register():
 # Dashboard Route
 @app.route('/dashboard')
 def dashboard():
-    return render_template('home.html')
+    if 'user_id' not in session:
+        flash("Please Login First!", "error")
+        return render_template("login.html")
+    
+    with get_db_connection() as connection:
+        user = connection.execute('''
+            SELECT * FROM cartUsers where id=?
+        ''', (session['user_id'],)
+        ).fetchone()
+
+        connection.commit()
+
+    return render_template('home.html', user=dict(user))
+
+
+# Add to Cart Route
+@app.route('/add_to_cart', methods=["GET", "POST"])
+def add_to_cart():
+    if 'user_id' not in session:
+        flash("Please Login First!", "error")
+        return render_template("login.html")
+    
+    if request.method == "POST":
+        user_id = session['user_id']
+        product_name = request.form["name"]
+        price = float(request.form["price"])
+        quantity = int(request.form['quantity'])
+
+        with get_db_connection() as connection:
+            existing = connection.execute('''
+                SELECT quantity FROM cart WHERE user_id=? AND product_name=?
+            ''', (user_id, product_name)).fetchone()
+
+            if existing:
+                new_quantity = existing['quantity'] + quantity
+                new_total = price * new_quantity
+                connection.execute('''
+                    UPDATE cart
+                    SET quantity = ?, total = ?
+                    WHERE user_id=? AND product_name=?
+                ''', (new_quantity, new_total, user_id, product_name))
+            else:
+                total = price * quantity
+                connection.execute('''
+                    INSERT INTO cart (user_id, product_name, price, quantity, total)
+                    VALUES (?, ?, ?, ?, ?)
+                ''', (user_id, product_name, price, quantity, total))
+
+            connection.commit()
+
+    flash("Added Item to Cart!", "success")
+    return redirect(url_for("dashboard"))
 
 
 # View Cart Route
 @app.route('/view_cart')
 def view_cart():
-    return render_template('view-cart.html')
+    if "user_id" not in session:
+        flash("Please login first!", "error")
+        return render_template("login.html")
+
+    user_id = session['user_id']
+
+    with get_db_connection() as connection:
+        cart = connection.execute('''
+            SELECT product_name, price, quantity, total
+            FROM cart
+            WHERE user_id=?
+        ''', (user_id,)).fetchall() or 0 
+
+    return render_template('view-cart.html', cart=cart)
 
 
 # Logout Route

@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     border-collapse: collapse;
+    font-family: 'Poppins';
 }
 
 /* NavBar */
@@ -29,6 +30,11 @@
 .profile-img {
     border-radius: 100%;
     width: 200px;
+}
+
+.phone-number {
+    color: grey;
+    font-size: 16px;
 }
 
 .action-link a {
@@ -61,6 +67,7 @@
 
 .card-description {
     text-align: center;
+    color: grey;
 }
 
 h6 {
@@ -88,4 +95,14 @@ h6 {
 
 .count {
     padding: 10px;
+}
+
+.success-message {
+    font-size: 1.2rem;
+    color: green;
+}
+
+.error-message {
+    font-size: 1.2rem;
+    color: red;
 }

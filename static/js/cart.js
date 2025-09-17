@@ -1,3 +1,4 @@
+// ------------------ Product Data ------------------
 const products = [
   { name: "Samsung Galaxy S24 Ultra", price: 129999, image: "static/images/samsung.avif" },
   { name: "Apple iPhone 15 Pro", price: 134900, image: "static/images/iphone.avif" },
@@ -25,27 +26,63 @@ const products = [
   { name: "Logitech MX Master 3 Mouse", price: 8499, image: "static/images/mouse.avif" }
 ];
 
-  const productList = document.getElementById("product-list");
+// ------------------ Render Products ------------------
+const productList = document.getElementById("product-list");
 
-  products.forEach(product => {
-    productList.innerHTML += `
-            <div class="col-sm-3">
-                <div class="card mt-3 mb-3 d-block mx-auto">
-                    <img src="${product.image}" alt="${product.name}" class="card-img-top">
-                    <div class="card-content">
-                        <h5 class="card-title mt-3">${product.name}</h5>
-                        <p class="card-description">Price: Rs. ${product.price.toLocaleString()}</p>
-                        <div class="quantity mb-3">
-                            <h6>Quantity</h6>
-                            <div class="quantity-button">
-                                <button class="btn btn-outline-secondary">-</button>
-                                <span class="count">1</span>
-                                <button class="btn btn-outline-secondary">+</button>
-                            </div>
-                        </div>
-                        <button type="button" class="btn btn-outline-success d-block mx-auto mt-3 mb-3 p-2">Add To cart</button>
-                    </div>
-                </div>
+products.forEach(product => {
+  productList.innerHTML += `
+    <div class="col-sm-3">
+      <div class="card mt-3 mb-3 d-block mx-auto">
+        <img src="${product.image}" alt="${product.name}" class="card-img-top">
+        <div class="card-content">
+          <h5 class="card-title mt-3">${product.name}</h5>
+          <p class="card-description">Price: Rs. ${product.price.toLocaleString()}</p>
+          <div class="quantity mb-3">
+            <h6>Quantity</h6>
+            <div class="quantity-button">
+              <button class="btn btn-outline-secondary">-</button>
+              <span class="count">1</span>
+              <button class="btn btn-outline-secondary">+</button>
             </div>
-        `;
-    });
+          </div>
+          <form action="/add_to_cart" method="POST">
+            <input type="hidden" name="name" value="${product.name}">
+            <input type="hidden" name="price" value="${product.price}">
+            <input type="hidden" name="quantity" class="quantity-input" value="1">
+            <button type="submit" class="btn btn-outline-success d-block mx-auto mt-3 mb-3 p-2">
+              Add To Cart
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  `;
+});
+
+function attachQuantityHandlers(card) {
+  const minusBtn = card.querySelector(".quantity-button button:first-child");
+  const plusBtn = card.querySelector(".quantity-button button:last-child");
+  const countSpan = card.querySelector(".count");
+  const quantityInput = card.querySelector(".quantity-input");
+
+  let count = 1;
+
+  minusBtn.addEventListener("click", () => {
+    if (count > 1) {
+      count--;
+      countSpan.textContent = count;
+      quantityInput.value = count;
+    }
+  });
+
+  plusBtn.addEventListener("click", () => {
+    count++;
+    countSpan.textContent = count;
+    quantityInput.value = count;
+  });
+}
+
+// ------------------ Apply Handlers ------------------
+document.querySelectorAll(".card").forEach(card => {
+  attachQuantityHandlers(card);
+});

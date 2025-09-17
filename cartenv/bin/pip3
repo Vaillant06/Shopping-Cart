@@ -1,4 +1,4 @@
-#!/home/sreenath/Sree/Projects/shopping-cart/cartenv/bin/python
+#!/home/sreenath/Sree/Projects/Shopping-Cart/cartenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

@@ -1,6 +1,8 @@
 * {
     padding: 0;
     margin: 0;
+    border-collapse: collapse;
+    font-family: 'Poppins';
 }
 
 .navbar-brand {
