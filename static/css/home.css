@@ -1,0 +1,91 @@
+* {
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+}
+
+/* NavBar */
+.navbar-brand {
+    font-family: 'Orbitron';
+}
+
+.search {
+    width: 300px;
+}
+
+/* Main Content */
+.main {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 400px;
+    border-radius: 10px;
+}
+
+.profile-img {
+    border-radius: 100%;
+    width: 200px;
+}
+
+.action-link a {
+    width: 200px;
+}
+
+
+/* Products */
+.products {
+    width: 1500px;
+    border-radius: 20px;
+    overflow-y: auto;
+    height: 100vh;
+    border-radius: 10px;
+}
+
+.card {
+    width: 350px;
+    border-radius: 10px;
+    background:linear-gradient(180deg, rgb(251, 253, 235), white) ;
+}
+
+.card-img-top {
+    height: 300px;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.card-description {
+    text-align: center;
+}
+
+h6 {
+    padding-top: 12px;
+}
+
+.quantity {
+    border: none;
+    border-top: 1px solid black;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.quantity-button {
+    display: flex;
+    gap: 15px;
+}
+
+.quantity-button button {
+    font-size: 20px;
+    width: 60px;
+    height: 40px;
+}
+
+.count {
+    padding: 10px;
+}

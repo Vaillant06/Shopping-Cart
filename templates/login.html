@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet"> 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
+    <title>Login | ALA BIBA</title>
+</head>
+<body>
+    <!-- Naivgatio Bar -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold fs-2 p-4 mt-3 mb-3 text-primary">
+                <i class="bi bi-bag-check-fill"></i> ALA BIBA
+            </a>
+        </div>
+    </nav>
+
+    <!-- Login Form Container -->
+    <div class="d-flex align-items-center justify-content-center mt-5 p-5">
+        <div class="container">
+            <form action="/login" class="form-content" method="POST">
+                <h2 class="title mt-5">Login</h2>
+                <p class="description">Login to Explore Items</p>
+                <div class="info mt-4">
+                    <label for="username" class="text-center m-2">Username</label>
+                    <input type="text" name="username" id="username" class="mb-3 mt-2" required autocomplete="off">
+
+                    <label for="password" class="text-center m-2">Password</label>
+                    <input type="password" name="password" id="password" class="mb-3 mt-2" required>
+
+                    <button type="submit" class="btn btn-success p-3 mt-3 mb-3 d-block mx-auto">Login</button> 
+                    
+                    <p class="text-center mb-5">New User?
+                        <span>
+                            <a href="{{ url_for('register') }}">
+                                Register
+                            </a>
+                        </span>
+                    </p>
+                </div>
+            </form>
+
+            <!-- Flash messages -->
+            <div id="flash-messages" class="text-center">
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% for category, message in messages %}
+                    <p class="{{ 'error-message' if category == 'error' else 'success-message' }} message">
+                    {{ message }}
+                    </p>
+                {% endfor %}
+                {% endwith %}
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Code -->
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
+
+</body>
+</html>
