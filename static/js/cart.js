@@ -1,4 +1,4 @@
-// ------------------ Product Data ------------------
+// Product Data
 const products = [
   { name: "Samsung Galaxy S24 Ultra", price: 129999, image: "static/images/samsung.avif" },
   { name: "Apple iPhone 15 Pro", price: 134900, image: "static/images/iphone.avif" },
@@ -8,25 +8,26 @@ const products = [
   { name: "MacBook Air M2", price: 104900, image: "static/images/macbook.avif" },
   { name: "HP Pavilion Gaming Laptop", price: 74999, image: "static/images/hp.avif" },
   { name: "Acer VivoBook 16", price: 148000, image: "static/images/acer.avif" },
-  { name: "Sony WH-1000XM5 Headphones", price: 29990, image: "static/images/headphones.avif" },
+  { name: "Sony WH-1000XM5 Headphones", price: 4600, image: "static/images/headphones.avif" },
   { name: "boAt Airdopes 141", price: 1499, image: "static/images/earbuds.avif" },
-  { name: "JBL Flip 6 Bluetooth Speaker", price: 11499, image: "static/images/speaker.avif" },
+  { name: "JBL Flip 6 Bluetooth Speaker", price: 6999, image: "static/images/speaker.avif" },
   { name: "Samsung 55in 4K Smart TV", price: 52990, image: "static/images/tv.avif" },
   { name: "LG 1.5 Ton Split AC", price: 45990, image: "static/images/ac.avif" },
   { name: "Whirlpool Double Door Fridge", price: 28990, image: "static/images/fridge.avif" },
   { name: "Bosch 7kg Washing Machine", price: 32990, image: "static/images/wm.avif" },
-  { name: "Canon EOS 1500D DSLR", price: 38990, image: "static/images/camera.avif" },
-  { name: "Nike Air Max Shoes", price: 8499, image: "static/images/nike.avif" },
-  { name: "Adidas Ultraboost", price: 12999, image: "static/images/adidas.avif" },
+  { name: "Canon EOS 1500D DSLR", price: 14999, image: "static/images/camera.avif" },
+  { name: "Nike Air Max Shoes", price: 4499, image: "static/images/nike.avif" },
+  { name: "Adidas Ultraboost", price: 4999, image: "static/images/adidas.avif" },
   { name: "Puma Sports T-Shirt", price: 1499, image: "static/images/tshirt.avif" },
-  { name: "Levi's Slim Fit Jeans", price: 3499, image: "static/images/jeans.avif" },
-  { name: "Fossil Gen 6 Smartwatch", price: 22990, image: "static/images/watch.avif" },
-  { name: "Apple Watch SE", price: 29900, image: "static/images/swatch.avif" },
+  { name: "Levi's Slim Fit Jeans", price: 1299, image: "static/images/jeans.avif" },
+  { name: "Fossil Gen 6 Smartwatch", price: 3199, image: "static/images/watch.avif" },
+  { name: "Apple Watch SE", price: 2990, image: "static/images/swatch.avif" },
   { name: "Cosmic Byte Gaming Keyboard", price: 2499, image: "static/images/keyboard.avif" },
-  { name: "Logitech MX Master 3 Mouse", price: 8499, image: "static/images/mouse.avif" }
+  { name: "Logitech MX Master 3 Mouse", price: 849, image: "static/images/mouse.avif" }
 ];
 
-// ------------------ Render Products ------------------
+
+// Render Products
 const productList = document.getElementById("product-list");
 
 products.forEach(product => {
@@ -59,6 +60,8 @@ products.forEach(product => {
   `;
 });
 
+
+// Handler to increase the quantity of the items
 function attachQuantityHandlers(card) {
   const minusBtn = card.querySelector(".quantity-button button:first-child");
   const plusBtn = card.querySelector(".quantity-button button:last-child");
@@ -82,7 +85,8 @@ function attachQuantityHandlers(card) {
   });
 }
 
-// ------------------ Apply Handlers ------------------
+
+// Calling Handler Functions
 document.querySelectorAll(".card").forEach(card => {
   attachQuantityHandlers(card);
 });

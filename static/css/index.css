@@ -1,0 +1,26 @@
+* {
+    padding: 0;
+    margin: 0;
+    border-collapse: collapse;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.navbar-brand {
+    font-family: 'Orbitron';
+    cursor: pointer;
+}
+
+.container {
+    border: 1px;
+    border-radius: 15px;
+    width: 500px;
+    height: auto;
+    box-shadow: 0px 0px 10px grey;
+}
