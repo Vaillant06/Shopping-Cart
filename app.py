@@ -147,12 +147,41 @@ def view_cart():
 
     with get_db_connection() as connection:
         cart = connection.execute('''
-            SELECT product_name, price, quantity, total
+            SELECT user_id, product_name, price, quantity, total
             FROM cart
             WHERE user_id=?
         ''', (user_id,)).fetchall() or 0 
 
-    return render_template('view-cart.html', cart=cart)
+        grand_total = 0
+
+        if cart:
+            cart = [dict(row) for row in cart]
+            for item in cart:
+                item['total'] = int(item['price']) * int(item['quantity'])
+                grand_total += item['total']
+
+    return render_template('view-cart.html', cart=cart, grand_total=grand_total)
+
+
+# Remove cart Route
+@app.route('/RemoveFromCart/<product_name>', methods=["GET", "POST"])
+def remove(product_name):
+    if 'user_id' not in session:
+        flash("Please loging first!", "error")
+    
+    user_id = session['user_id']
+    if request.method == "POST":
+        with get_db_connection() as connection:
+            connection.execute('''
+                DELETE FROM cart 
+                WHERE product_name=? AND user_id=?
+            ''', (product_name, user_id)
+            )
+
+            connection.commit()
+    
+    flash(f"Removed {product_name} from cart successfully!", "success")
+    return redirect(url_for("view_cart"))
 
 
 # Logout Route

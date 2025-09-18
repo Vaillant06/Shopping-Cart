@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Orbitron&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=poppins&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/view-cart.css') }}">
@@ -20,44 +20,65 @@
         </div>
     </nav>
 
+    <!-- Cart Table -->
     <div class="container mt-5">
         <h2 class="mb-4">🛒 Your Shopping Cart</h2>
 
         {% if cart %}
         <table class="table table-bordered table-hover">
-            <thead class="table-dark">
+            <thead class="table-info">
                 <tr>
                     <th>Product</th>
                     <th>Price (₹)</th>
                     <th>Quantity</th>
                     <th>Total (₹)</th>
+                    <th>Remove</th>
                 </tr>
             </thead>
             <tbody>
-                {% set grand_total = 0 %}
                 {% for item in cart %}
-                    {% set grand_total = grand_total + item['total'] %}
                     <tr>
                         <td>{{ item['product_name'] }}</td>
                         <td>{{ item['price'] }}</td>
                         <td>{{ item['quantity'] }}</td>
                         <td>{{ item['total'] }}</td>
+                        <td>
+                            <form action="{{ url_for('remove', product_name=item['product_name']) }}" method="POST">
+                                <button type="submit" class="btn btn-danger d-block mx-auto">Remove</button>
+                            </form>
+                        </td>
                     </tr>
                 {% endfor %}
             </tbody>
-            <tfoot class="table-secondary">
-                <tr>
-                    <td colspan="3" class="text-end"><strong>Grand Total:</strong></td>
-                    <td><strong>₹ {{ grand_total }}</strong></td>
-                </tr>
-            </tfoot>
         </table>
+        <div>
+            <h5 class="text-start text-secondary mb-4">Grand Total: 
+                <span class="fw-bold text-primary">
+                    ₹ {{ grand_total }} 
+                </span>
+            </h5>
+        </div>
         {% else %}
         <div class="alert alert-info">Your cart is empty!</div>
         {% endif %}
 
+        <!-- Action Links -->
         <a href="{{ url_for('dashboard') }}" class="btn btn-primary">Continue Shopping</a>
         <a href="#" class="btn btn-success">Proceed to Checkout</a>
+
+        <!-- Flash Messages -->
+        <div id="flash-messages" class="text-center m-5">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% for category, message in messages %}
+                <p class="{{ 'error-message' if category == 'error' else 'success-message' }} message">
+                {{ message }}
+                </p>
+            {% endfor %}
+            {% endwith %}
+        </div>
     </div>
+
+    <!-- JavaScript Code -->
+    <script src="{{ url_for('static', filename='js/flash-messages.js') }}"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@
 /* NavBar */
 .navbar-brand {
     font-family: 'Orbitron';
+    cursor: pointer;
 }
 
 .search {
@@ -52,9 +53,16 @@
 }
 
 .card {
+    cursor: pointer;
     width: 350px;
     border-radius: 10px;
     background:linear-gradient(180deg, rgb(251, 253, 235), white) ;
+    transition: 0.2s ease-in;
+}
+
+.card:hover {
+    transform: scale(1.02);
+    transition: 0.2s ease-out;
 }
 
 .card-img-top {

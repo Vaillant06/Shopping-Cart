@@ -7,6 +7,7 @@
 
 .navbar-brand {
     font-family: 'Orbitron';
+    cursor: pointer;
 }
 
 .container {
@@ -49,6 +50,10 @@ input:focus {
 
 button {
     width: 200px;
+}
+
+a {
+    text-decoration: none;
 }
 
 .success-message {

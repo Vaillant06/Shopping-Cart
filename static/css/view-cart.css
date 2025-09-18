@@ -8,4 +8,14 @@
 /* NavBar */
 .navbar-brand {
     font-family: 'Orbitron';
+    cursor: pointer;
+}
+
+/* Flash Messages */
+.success-message {
+    color: green;
+}
+
+.error-message {
+    color: red;
 }
