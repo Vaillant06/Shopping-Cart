@@ -2,6 +2,7 @@ from flask import Flask, redirect, render_template, url_for, flash, session, req
 from werkzeug.security import generate_password_hash, check_password_hash
 import sqlite3
 
+# Application Setup
 DB_NAME = 'ShoppingCart.db'
 app = Flask(__name__)
 app.secret_key = 'mySecretKey'
@@ -163,7 +164,7 @@ def view_cart():
     return render_template('view-cart.html', cart=cart, grand_total=grand_total)
 
 
-# Remove cart Route
+# Remove from cart Route
 @app.route('/RemoveFromCart/<product_name>', methods=["GET", "POST"])
 def remove(product_name):
     if 'user_id' not in session:

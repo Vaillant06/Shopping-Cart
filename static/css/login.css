@@ -56,6 +56,7 @@ a {
     text-decoration: none;
 }
 
+/* Flash Messages */
 .success-message {
     color: green;
 }
